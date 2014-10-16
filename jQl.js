@@ -265,8 +265,7 @@ var jQl={
 		var xoe;
 		xoe = jQl.getxo();
 		xoe.onreadystatechange = function() {
-			if ( xoe.readyState != 4 || 200 != xoe.status ) return;
-			callback(xoe.responseText,src);
+			if ( xoe.readyState == 4 && 200 == xoe.status ) callback(xoe.responseText,src);
 		};
 		try {
 			xoe.open('GET', src, true);
