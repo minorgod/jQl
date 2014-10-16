@@ -34,7 +34,7 @@
  * are run before inline scripts. But if some modules are longer to load and arrive
  * after jQuery, they will be run after queued inline calls
  *
- * v 1.3.0
+ * v 1.3.1
  * (c) 2010-2013 Cedric Morin licence GPL
  *
  */
@@ -85,8 +85,13 @@ var jQl={
 	 *
 	 */
 	"unq":function(){
-		for(var i=0;i<jQl.q.length;i++)
+        if(jQl.dMap.length != 0) {
+            setTimeout(jQl.unq,25);
+            return;
+        }
+		for(var i=0;i<jQl.q.length;i++) {
 			jQl.q[i]();
+        }
 		jQl.q=[];},
 
 	/**
@@ -237,8 +242,10 @@ var jQl={
 			setTimeout(jQl.unqjQdep, 50);
 			return;
 		}
-		for (var i=0;i<jQl.dMap.length;i++) jQl.rs(jQl.dq[jQl.dMap[i]]);
-		jQl.dq = [];
+		for (var i=0;i<jQl.dMap.length;i++) {
+            jQl.rs(jQl.dq[jQl.dMap[i]]);
+        }
+        jQl.dq = [];
 		jQl.dMap = [];
 	},
 
