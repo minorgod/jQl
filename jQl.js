@@ -55,6 +55,11 @@ var jQl={
 	"gs":[],
 
 	/**
+	 * for jQuery-extension functions
+	 */
+  "fn":{},
+
+	/**
 	 * the ready function that collect calls and put it in the queue
 	 */
 	"ready":function(f){
@@ -118,6 +123,9 @@ var jQl={
 
 		// then unqueue all getScript calls
 		jQl.ungs();
+
+    // add extentions to jQuery
+    jQuery.fn.extend(jQl.fn);
 
 		// and last unqueue all inline calls
 		// (when document is ready)
@@ -288,4 +296,4 @@ var jQl={
  *
  * only if jQuery is not already loaded
  */
-if (typeof window.jQuery=='undefined'){var $=jQl.ready,jQuery=$;$.getScript=jQl.getScript;}
+if (typeof window.jQuery=='undefined'){var $=jQl.ready,jQuery=$;$.getScript=jQl.getScript;$.fn=jQl.fn;}
